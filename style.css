@@ -50,6 +50,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Card Border Overlay Frame - Fluid Responsive Scaling */
+.card-border-overlay {
+  position: fixed;
+  --frame-margin: clamp(8px, 1.8vw, 24px);
+  top: var(--frame-margin);
+  left: var(--frame-margin);
+  right: var(--frame-margin);
+  bottom: var(--frame-margin);
+  border: 1px solid rgba(183, 155, 91, 0.5);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 0 var(--frame-margin) var(--bg-soft-ivory);
+}
+
+.card-border-overlay::after {
+  content: "";
+  position: absolute;
+  --inner-offset: clamp(3px, 0.6vw, 8px);
+  top: var(--inner-offset);
+  left: var(--inner-offset);
+  right: var(--inner-offset);
+  bottom: var(--inner-offset);
+  border: 1px dashed rgba(183, 155, 91, 0.2);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -92,7 +121,7 @@ a {
   width: 90%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 5rem 0;
+  padding: clamp(3rem, 7vw, 6rem) 0;
 }
 
 .text-center {
@@ -115,7 +144,7 @@ a {
 
 /* Elegant Section Titles */
 .section-header {
-  margin-bottom: 4rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
   position: relative;
 }
 
@@ -198,12 +227,12 @@ a {
   transform: scaleY(1);
 }
 
-/* Elegant Cards */
+/* Elegant Cards - Fluid Responsive Padding & Borders */
 .elegant-card {
   background-color: var(--card-bg);
   border: var(--border-gold);
   border-radius: 8px;
-  padding: 3rem 2rem;
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 3.5vw, 2.5rem);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   transition: var(--transition-smooth);
   position: relative;
@@ -212,10 +241,11 @@ a {
 .elegant-card::after {
   content: "";
   position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
+  --card-inner-offset: clamp(5px, 1vw, 10px);
+  top: var(--card-inner-offset);
+  left: var(--card-inner-offset);
+  right: var(--card-inner-offset);
+  bottom: var(--card-inner-offset);
   border: 1px dashed rgba(183, 155, 91, 0.2);
   border-radius: 6px;
   pointer-events: none;
@@ -232,10 +262,12 @@ a {
    ========================================================================== */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  --frame-margin: clamp(8px, 1.8vw, 24px);
+  top: var(--frame-margin);
+  left: var(--frame-margin);
+  right: var(--frame-margin);
+  width: calc(100% - (2 * var(--frame-margin)));
+  z-index: 10000;
   background-color: transparent;
   border-bottom: 1px solid transparent;
   transition: var(--transition-smooth);
@@ -330,10 +362,12 @@ header.scrolled .navbar {
   
   .nav-menu {
     position: fixed;
-    top: 0;
+    --frame-margin: clamp(8px, 1.8vw, 24px);
+    top: var(--frame-margin);
+    bottom: var(--frame-margin);
     right: -100%;
-    height: 100vh;
-    width: 280px;
+    height: calc(100vh - (2 * var(--frame-margin)));
+    width: min(280px, calc(100vw - (2 * var(--frame-margin))));
     background-color: var(--bg-soft-ivory);
     border-left: var(--border-gold);
     flex-direction: column;
@@ -345,7 +379,7 @@ header.scrolled .navbar {
   }
   
   .nav-menu.active {
-    right: 0;
+    right: var(--frame-margin);
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.05);
   }
   
@@ -719,7 +753,7 @@ header.scrolled .navbar {
 .countdown-wrapper {
   max-width: 800px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3.5vw, 2.5rem);
   background-color: #FFFFFF;
   border: var(--border-gold);
   border-radius: 8px;
@@ -729,10 +763,11 @@ header.scrolled .navbar {
 .countdown-wrapper::after {
   content: "";
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  --wrapper-inner-offset: clamp(5px, 1.2vw, 10px);
+  top: var(--wrapper-inner-offset);
+  left: var(--wrapper-inner-offset);
+  right: var(--wrapper-inner-offset);
+  bottom: var(--wrapper-inner-offset);
   border: 1px dashed rgba(183, 155, 91, 0.15);
   border-radius: 6px;
   pointer-events: none;
