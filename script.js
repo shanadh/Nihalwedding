@@ -116,4 +116,21 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(el => {
     revealObserver.observe(el);
   });
+
+  /* ==========================================================================
+     STICKY NAVIGATION (SCROLL EFFECT)
+     ========================================================================== */
+  const header = document.querySelector('header');
+  
+  function handleScroll() {
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+  
+  window.addEventListener('scroll', handleScroll);
+  // Run on load in case page is already scrolled
+  handleScroll();
 });
