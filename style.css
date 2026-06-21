@@ -306,7 +306,7 @@ a {
    NAVIGATION BAR
    ========================================================================== */
 header {
-  position: fixed;
+  position: absolute;
   --frame-margin: clamp(8px, 1.8vw, 24px);
   top: var(--frame-margin);
   left: var(--frame-margin);
@@ -318,14 +318,6 @@ header {
   transition: var(--transition-smooth);
 }
 
-header.scrolled {
-  background-color: rgba(250, 248, 243, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(183, 155, 91, 0.15);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -335,10 +327,6 @@ header.scrolled {
   margin: 0 auto;
   padding: 1.25rem clamp(1rem, 5vw, 2.5rem);
   transition: var(--transition-smooth);
-}
-
-header.scrolled .navbar {
-  padding: 0.75rem clamp(1rem, 5vw, 2.5rem);
 }
 
 .nav-brand {
@@ -539,12 +527,28 @@ header.scrolled .navbar {
   }
 }
 
+.hero-weds-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem auto;
+  width: min(300px, 80%);
+}
+
+.hero-weds-divider::before,
+.hero-weds-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: radial-gradient(circle, var(--gold-accent) 0%, transparent 100%);
+}
+
 .hero-weds {
   font-family: var(--font-decorative);
   font-size: clamp(1.8rem, 6vw, 2.8rem);
   color: var(--gold-accent);
-  line-height: 1.2;
-  margin: 0.5rem 0;
+  margin: 0 1.5rem;
+  line-height: 1;
 }
 
 .hero-date {
