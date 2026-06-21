@@ -3,15 +3,18 @@
    ========================================================================== */
 :root {
   /* Colors */
-  --bg-soft-ivory: #FAF8F3;
-  --text-dark-charcoal: #222222;
-  --text-muted: #555555;
-  --gold-accent: #B79B5B;
-  --gold-hover: #D4AF37;
-  --gold-light: #F0E6D2;
-  --card-bg: #FFFFFF;
-  --border-gold: 1px solid rgba(183, 155, 91, 0.3);
-  --border-gold-strong: 1px solid rgba(183, 155, 91, 0.8);
+  --bg-dark: #0A192F;         /* Deep midnight navy */
+  --bg-alt: #0F223D;          /* Alternate slightly lighter navy */
+  --bg-card: #172A45;         /* Navy green/blue for cards */
+  --text-gold-light: #F4E3C1; /* Soft champagne gold */
+  --text-gold-muted: #C4B18F; /* Brushed champagne gold */
+  --gold-accent: #E5C158;     /* Champagne gold */
+  --gold-hover: #F7E5A9;      /* Light champagne gold */
+  --gold-light: #F3E8D3;
+  
+  --card-bg: var(--bg-card);
+  --border-gold: 1px solid rgba(229, 193, 88, 0.25);
+  --border-gold-strong: 1px solid rgba(229, 193, 88, 0.7);
   
   /* Fonts */
   --font-heading: 'Playfair Display', Georgia, serif;
@@ -39,8 +42,8 @@ html {
 }
 
 body {
-  background-color: var(--bg-soft-ivory);
-  color: var(--text-dark-charcoal);
+  background-color: var(--bg-dark);
+  color: var(--text-gold-light);
   font-family: var(--font-body);
   font-size: 1.15rem;
   line-height: 1.8;
@@ -58,11 +61,11 @@ body {
   left: var(--frame-margin);
   right: var(--frame-margin);
   bottom: var(--frame-margin);
-  border: 1px solid rgba(183, 155, 91, 0.5);
+  border: 1px solid rgba(229, 193, 88, 0.4);
   border-radius: 4px;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 0 var(--frame-margin) var(--bg-soft-ivory);
+  box-shadow: 0 0 0 var(--frame-margin) var(--bg-dark);
 }
 
 .card-border-overlay::after {
@@ -73,7 +76,7 @@ body {
   left: var(--inner-offset);
   right: var(--inner-offset);
   bottom: var(--inner-offset);
-  border: 1px dashed rgba(183, 155, 91, 0.2);
+  border: 1px dashed rgba(229, 193, 88, 0.2);
   border-radius: 3px;
   pointer-events: none;
 }
@@ -84,7 +87,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-soft-ivory);
+  background: var(--bg-dark);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--gold-accent);
@@ -98,14 +101,14 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: 400;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   letter-spacing: 0.05em;
   line-height: 1.3;
 }
 
 p {
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--text-gold-muted);
 }
 
 a {
@@ -186,14 +189,14 @@ a {
   height: 18px;
 }
 
-/* Elegant Buttons */
+/* Elegant Buttons - Expanding Inner Frame Hover */
 .btn-gold {
   display: inline-block;
   font-family: var(--font-heading);
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   background: transparent;
   padding: 1rem 2.5rem;
   border: 1px solid var(--gold-accent);
@@ -218,13 +221,35 @@ a {
   z-index: -1;
 }
 
+.btn-gold::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px dashed rgba(229, 193, 88, 0.25);
+  transition: var(--transition-smooth);
+  pointer-events: none;
+}
+
 .btn-gold:hover {
-  color: #FFFFFF;
+  color: var(--bg-dark);
   border-color: var(--gold-accent);
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(229, 193, 88, 0.15);
 }
 
 .btn-gold:hover::before {
   transform: scaleY(1);
+}
+
+.btn-gold:hover::after {
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border-color: var(--bg-dark);
 }
 
 /* Elegant Cards - Fluid Responsive Padding & Borders */
@@ -246,15 +271,24 @@ a {
   left: var(--card-inner-offset);
   right: var(--card-inner-offset);
   bottom: var(--card-inner-offset);
-  border: 1px dashed rgba(183, 155, 91, 0.2);
+  border: 1px dashed rgba(229, 193, 88, 0.15);
   border-radius: 6px;
   pointer-events: none;
+  transition: var(--transition-smooth);
 }
 
 .elegant-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(183, 155, 91, 0.6);
-  box-shadow: 0 10px 30px rgba(183, 155, 91, 0.08);
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(229, 193, 88, 0.5);
+  box-shadow: 0 12px 35px rgba(229, 193, 88, 0.1);
+}
+
+.elegant-card:hover::after {
+  top: calc(var(--card-inner-offset) - 3px);
+  left: calc(var(--card-inner-offset) - 3px);
+  right: calc(var(--card-inner-offset) - 3px);
+  bottom: calc(var(--card-inner-offset) - 3px);
+  border-color: rgba(229, 193, 88, 0.45);
 }
 
 /* ==========================================================================
@@ -274,7 +308,7 @@ header {
 }
 
 header.scrolled {
-  background-color: rgba(250, 248, 243, 0.95);
+  background-color: rgba(10, 25, 47, 0.95);
   backdrop-filter: blur(5px);
   border-bottom: var(--border-gold);
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02);
@@ -284,21 +318,21 @@ header.scrolled {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 1.5rem 0;
+  padding: 1.25rem clamp(1rem, 5vw, 2.5rem);
   transition: var(--transition-smooth);
 }
 
 header.scrolled .navbar {
-  padding: 1rem 0;
+  padding: 0.75rem clamp(1rem, 5vw, 2.5rem);
 }
 
 .nav-brand {
   font-family: var(--font-decorative);
   font-size: 2.2rem;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   font-weight: 500;
 }
 
@@ -350,7 +384,7 @@ header.scrolled .navbar {
   display: block;
   width: 25px;
   height: 2px;
-  background-color: var(--text-dark-charcoal);
+  background-color: var(--text-gold-light);
   margin: 5px 0;
   transition: var(--transition-fast);
 }
@@ -368,7 +402,7 @@ header.scrolled .navbar {
     right: -100%;
     height: calc(100vh - (2 * var(--frame-margin)));
     width: min(280px, calc(100vw - (2 * var(--frame-margin))));
-    background-color: var(--bg-soft-ivory);
+    background-color: var(--bg-alt);
     border-left: var(--border-gold);
     flex-direction: column;
     justify-content: center;
@@ -408,18 +442,18 @@ header.scrolled .navbar {
   justify-content: center;
   padding-top: 80px;
   overflow: hidden;
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
 }
 
 /* SVG Corner Ornaments */
 .hero-ornament {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: clamp(70px, 18vw, 150px);
+  height: clamp(70px, 18vw, 150px);
   fill: none;
   stroke: var(--gold-accent);
   stroke-width: 0.8;
-  opacity: 0.65;
+  opacity: 0.45;
   pointer-events: none;
 }
 
@@ -427,29 +461,30 @@ header.scrolled .navbar {
   .hero-ornament {
     width: 250px;
     height: 250px;
+    opacity: 0.65;
   }
 }
 
 .ornament-top-left {
-  top: 40px;
-  left: 40px;
+  top: clamp(12px, 3vw, 40px);
+  left: clamp(12px, 3vw, 40px);
 }
 
 .ornament-top-right {
-  top: 40px;
-  right: 40px;
+  top: clamp(12px, 3vw, 40px);
+  right: clamp(12px, 3vw, 40px);
   transform: scaleX(-1);
 }
 
 .ornament-bottom-left {
-  bottom: 40px;
-  left: 40px;
+  bottom: clamp(12px, 3vw, 40px);
+  left: clamp(12px, 3vw, 40px);
   transform: scaleY(-1);
 }
 
 .ornament-bottom-right {
-  bottom: 40px;
-  right: 40px;
+  bottom: clamp(12px, 3vw, 40px);
+  right: clamp(12px, 3vw, 40px);
   transform: scale(-1);
 }
 
@@ -467,7 +502,7 @@ header.scrolled .navbar {
 }
 
 .hero-name {
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 8vw, 2.8rem);
   letter-spacing: 0.12em;
   font-weight: 300;
   text-transform: uppercase;
@@ -482,7 +517,7 @@ header.scrolled .navbar {
 
 .hero-weds {
   font-family: var(--font-decorative);
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
   color: var(--gold-accent);
   line-height: 1.2;
   margin: 0.5rem 0;
@@ -490,10 +525,10 @@ header.scrolled .navbar {
 
 .hero-date {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   margin-bottom: 2.5rem;
   position: relative;
   display: inline-block;
@@ -514,7 +549,7 @@ header.scrolled .navbar {
 .hero-countdown {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: clamp(0.75rem, 3.5vw, 1.5rem);
   margin-bottom: 3rem;
 }
 
@@ -534,14 +569,14 @@ header.scrolled .navbar {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--text-gold-muted);
 }
 
 /* ==========================================================================
    WEDDING DETAILS SECTION
    ========================================================================== */
 .details-section {
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
 }
 
 .details-grid {
@@ -583,7 +618,7 @@ header.scrolled .navbar {
 
 .detail-card p {
   font-size: 1.15rem;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   margin-bottom: 0.5rem;
 }
 
@@ -605,7 +640,7 @@ header.scrolled .navbar {
    COUPLE SECTION
    ========================================================================== */
 .couple-section {
-  background-color: #FFFFFF;
+  background-color: var(--bg-alt);
   position: relative;
 }
 
@@ -617,7 +652,7 @@ header.scrolled .navbar {
   left: 0;
   right: 0;
   height: 10px;
-  background: radial-gradient(ellipse at top, rgba(183, 155, 91, 0.15) 0%, transparent 80%);
+  background: radial-gradient(ellipse at top, rgba(229, 193, 88, 0.15) 0%, transparent 80%);
 }
 
 .couple-grid {
@@ -645,12 +680,12 @@ header.scrolled .navbar {
 /* Portrait photo container/placeholder */
 .couple-img-wrapper {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: clamp(160px, 45vw, 200px);
+  height: clamp(160px, 45vw, 200px);
   border-radius: 50%;
   margin-bottom: 2rem;
   padding: 8px;
-  border: 1px solid rgba(183, 155, 91, 0.25);
+  border: 1px solid rgba(229, 193, 88, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -672,7 +707,7 @@ header.scrolled .navbar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -704,7 +739,7 @@ header.scrolled .navbar {
 
 .couple-parentage {
   font-size: 1.15rem;
-  color: var(--text-muted);
+  color: var(--text-gold-muted);
   line-height: 2;
   position: relative;
   width: 100%;
@@ -725,7 +760,7 @@ header.scrolled .navbar {
 .couple-parentage .parent-name {
   font-family: var(--font-heading);
   font-size: 1.25rem;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   font-weight: 400;
 }
 
@@ -738,7 +773,7 @@ header.scrolled .navbar {
     top: 20%;
     bottom: 20%;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(183, 155, 91, 0.25), transparent);
+    background: linear-gradient(to bottom, transparent, rgba(229, 193, 88, 0.25), transparent);
   }
 }
 
@@ -746,7 +781,7 @@ header.scrolled .navbar {
    COUNTDOWN SECTION (DEDICATED)
    ========================================================================== */
 .countdown-section {
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
   position: relative;
 }
 
@@ -754,7 +789,7 @@ header.scrolled .navbar {
   max-width: 800px;
   margin: 0 auto;
   padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3.5vw, 2.5rem);
-  background-color: #FFFFFF;
+  background-color: var(--bg-card);
   border: var(--border-gold);
   border-radius: 8px;
   position: relative;
@@ -768,7 +803,7 @@ header.scrolled .navbar {
   left: var(--wrapper-inner-offset);
   right: var(--wrapper-inner-offset);
   bottom: var(--wrapper-inner-offset);
-  border: 1px dashed rgba(183, 155, 91, 0.15);
+  border: 1px dashed rgba(229, 193, 88, 0.15);
   border-radius: 6px;
   pointer-events: none;
 }
@@ -776,7 +811,7 @@ header.scrolled .navbar {
 .countdown-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
   margin-top: 2rem;
 }
 
@@ -792,14 +827,14 @@ header.scrolled .navbar {
   align-items: center;
   justify-content: center;
   padding: 1.5rem 1rem;
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
   border-radius: 6px;
-  border: 1px solid rgba(183, 155, 91, 0.15);
+  border: 1px solid rgba(229, 193, 88, 0.15);
 }
 
 .countdown-number {
   font-family: var(--font-heading);
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 3rem);
   color: var(--gold-accent);
   line-height: 1;
   font-weight: 300;
@@ -810,14 +845,14 @@ header.scrolled .navbar {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--text-gold-muted);
 }
 
 /* ==========================================================================
    LOCATION SECTION
    ========================================================================== */
 .location-section {
-  background-color: #FFFFFF;
+  background-color: var(--bg-dark);
 }
 
 .map-container {
@@ -835,8 +870,8 @@ header.scrolled .navbar {
 .map-placeholder {
   position: relative;
   width: 100%;
-  height: 350px;
-  background-color: #f3efe6;
+  height: clamp(220px, 45vh, 350px);
+  background-color: var(--bg-alt);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -852,7 +887,7 @@ header.scrolled .navbar {
   width: 100%;
   height: 100%;
   opacity: 0.15;
-  stroke: var(--text-dark-charcoal);
+  stroke: var(--gold-accent);
   stroke-width: 0.5;
   fill: none;
 }
@@ -876,12 +911,12 @@ header.scrolled .navbar {
 .map-center-pin span {
   font-family: var(--font-heading);
   font-size: 1.1rem;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   margin-top: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(23, 42, 69, 0.95);
   padding: 0.25rem 1rem;
   border-radius: 20px;
-  border: 1px solid rgba(183, 155, 91, 0.3);
+  border: 1px solid rgba(229, 193, 88, 0.3);
   font-weight: 500;
 }
 
@@ -899,7 +934,7 @@ header.scrolled .navbar {
    FOOTER SECTION
    ========================================================================== */
 .footer-section {
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
   padding: 5rem 0 3rem 0;
   position: relative;
   text-align: center;
@@ -921,7 +956,7 @@ header.scrolled .navbar {
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.75rem;
-  background-color: var(--bg-soft-ivory);
+  background-color: var(--bg-dark);
   padding: 0 0.5rem;
 }
 
@@ -939,16 +974,16 @@ header.scrolled .navbar {
 
 .footer-family-names {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 4.5vw, 1.4rem);
   letter-spacing: 0.1em;
-  color: var(--text-dark-charcoal);
+  color: var(--text-gold-light);
   word-spacing: 0.15em;
   font-weight: 300;
 }
 
 .footer-closing {
   font-family: var(--font-decorative);
-  font-size: 2.2rem;
+  font-size: clamp(1.7rem, 6.5vw, 2.2rem);
   color: var(--gold-accent);
   margin-top: 2rem;
   margin-bottom: 3rem;
@@ -956,7 +991,7 @@ header.scrolled .navbar {
 
 .footer-copyright {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--text-gold-muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
