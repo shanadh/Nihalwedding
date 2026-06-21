@@ -69,17 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* ==========================================================================
-     STICKY HEADER & NAV STATE
-     ========================================================================== */
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
+
 
   /* ==========================================================================
      MOBILE NAVIGATION MENU
