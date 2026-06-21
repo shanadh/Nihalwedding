@@ -1,6 +1,13 @@
 /* ==========================================================================
    STYLE GUIDE & CUSTOM PROPERTIES
    ========================================================================== */
+@font-face {
+  font-family: 'Yulltan';
+  src: url('Yulltan-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   /* Colors */
   --bg-main: #FAF8F3;         /* Soft Ivory Background */
@@ -299,7 +306,7 @@ a {
    NAVIGATION BAR
    ========================================================================== */
 header {
-  position: absolute;
+  position: fixed;
   --frame-margin: clamp(8px, 1.8vw, 24px);
   top: var(--frame-margin);
   left: var(--frame-margin);
@@ -309,6 +316,14 @@ header {
   background-color: transparent;
   border-bottom: 1px solid transparent;
   transition: var(--transition-smooth);
+}
+
+header.scrolled {
+  background-color: rgba(250, 248, 243, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(183, 155, 91, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .navbar {
@@ -322,11 +337,16 @@ header {
   transition: var(--transition-smooth);
 }
 
+header.scrolled .navbar {
+  padding: 0.75rem clamp(1rem, 5vw, 2.5rem);
+}
+
 .nav-brand {
-  font-family: var(--font-decorative);
-  font-size: 2.2rem;
+  font-family: var(--font-heading);
+  font-size: 2rem;
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .nav-menu {
@@ -491,12 +511,12 @@ header {
 
 .hero-basmala {
   font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', serif;
-  font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
   color: var(--gold-accent);
   margin-bottom: 2rem;
   text-align: center;
   direction: rtl;
-  opacity: 0.95;
+  opacity: 0.9;
   letter-spacing: normal;
 }
 
