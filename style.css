@@ -53,6 +53,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+section {
+  scroll-margin-top: clamp(16px, 4vw, 40px);
+}
+
 /* Card Border Overlay Frame - Fluid Responsive Scaling */
 .card-border-overlay {
   position: fixed;
@@ -295,7 +299,7 @@ a {
    NAVIGATION BAR
    ========================================================================== */
 header {
-  position: fixed;
+  position: absolute;
   --frame-margin: clamp(8px, 1.8vw, 24px);
   top: var(--frame-margin);
   left: var(--frame-margin);
@@ -307,13 +311,6 @@ header {
   transition: var(--transition-smooth);
 }
 
-header.scrolled {
-  background-color: rgba(10, 25, 47, 0.95);
-  backdrop-filter: blur(5px);
-  border-bottom: var(--border-gold);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02);
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -323,10 +320,6 @@ header.scrolled {
   margin: 0 auto;
   padding: 1.25rem clamp(1rem, 5vw, 2.5rem);
   transition: var(--transition-smooth);
-}
-
-header.scrolled .navbar {
-  padding: 0.75rem clamp(1rem, 5vw, 2.5rem);
 }
 
 .nav-brand {
@@ -419,7 +412,7 @@ header.scrolled .navbar {
   
   /* Toggle icon animation */
   .mobile-nav-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: translateY(7px) rotate(45deg);
   }
   
   .mobile-nav-toggle.active span:nth-child(2) {
@@ -427,7 +420,7 @@ header.scrolled .navbar {
   }
   
   .mobile-nav-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: translateY(-7px) rotate(-45deg);
   }
 }
 
